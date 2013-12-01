@@ -29,7 +29,7 @@ perl6 trace.p6 -h
 perl6 trace.p6 4 \<Dagrammar.p6 \>traced.p6
 
 Example of traced code, note statements are inserted by trace.p6:
-
+<pre>
 sub dump_node($node)
 {
  note "line  19";say "matched";
@@ -37,4 +37,4 @@ sub dump_node($node)
  note "line  21";say "reg $node"~$node<regliteral>;
  note "line  22";}
 note "line  23";}
-
+</pre>
