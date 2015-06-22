@@ -22,7 +22,7 @@ If you run the traced code, you will see what lines were executed.
 
     $ perl6 trace.p6 -h
 
-    $ perl6 trace.p6 4 \<Dagrammar.p6 \>traced.p6
+    $ perl6 trace.p6 4 <Dagrammar.p6 >traced.p6
 
 ## Example
 
