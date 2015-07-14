@@ -49,12 +49,12 @@ method trace(%options,$text)
       insertline();
       $tracenext = False;
     }
-     if ((@token[0][0].exists_key("routine_def_end")))
+     if ((@token[0][0].EXISTS-KEY("routine_def_end")))
       { 
         $tracenext = True;
       }
       
-      if ((@token[0][0].exists_key("routine_declarator")))
+      if ((@token[0][0].EXISTS-KEY("routine_declarator")))
       { 
         $tracenext = False;
       }

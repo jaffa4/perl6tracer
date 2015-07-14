@@ -36,6 +36,6 @@ $i++;
 
 my $f = Perl6::Tracer.new();
 
-my $content = $*IN.slurp;
+my $content = $*IN.slurp-rest;
 
 print $f.trace(%options,$content);
