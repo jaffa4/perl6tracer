@@ -12,25 +12,33 @@ sub getnextargument($index, $explanation)
 
 my $i = 0;
 my %options;
-
+%options<showline> = False;
 
 while ($i < @*ARGS)
 {
- if (@*ARGS[$i] eq "-h")
+ given (@*ARGS[$i]) {
+  when "-h"
  {
    note 
 "Perl6 tracer
 -h  help
+-sl show whole line when tracing
  standard input input file
  standard output output file
 ";
   exit 1;
  }
-else
+ when "-sl"
+{
+  %options<showline> = True;
+
+}
+default
 {
   note "unknown argument "~  @*ARGS[$i];
   exit 1;
 }
+ }
 $i++;
 }
 
