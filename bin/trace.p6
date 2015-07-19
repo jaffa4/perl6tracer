@@ -13,6 +13,7 @@ sub getnextargument($index, $explanation)
 my $i = 0;
 my %options;
 %options<showline> = False;
+%options<compiletime> = False;
 
 while ($i < @*ARGS)
 {
@@ -23,6 +24,7 @@ while ($i < @*ARGS)
 "Perl6 tracer
 -h  help
 -sl show whole line when tracing
+=c  trace compilation
  standard input input file
  standard output output file
 ";
@@ -31,6 +33,10 @@ while ($i < @*ARGS)
  when "-sl"
 {
   %options<showline> = True;
+}
+ when "-c"
+{
+  %options<compiletime> = True;
 
 }
 default

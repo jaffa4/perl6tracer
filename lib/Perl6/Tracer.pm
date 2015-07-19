@@ -37,8 +37,14 @@ method insertline($p)
       
     
     }
-     
-    push @*token_out, "note \"line  $lineno$rest\";";
+    if %options<compiletime> 
+    {
+      push @*token_out, "BEGIN \{note \"line  $lineno$rest\";};";
+    }
+    else
+    {
+      push @*token_out, "note \"line  $lineno$rest\";";
+    }
   }
   
 method trace(%options,$text)

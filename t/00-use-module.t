@@ -6,6 +6,8 @@ plan 2;
 
 use-ok 'Perl6::Tracer';
 
+use Perl6::Tracer;
+
 my $t = Perl6::Tracer.new();
 
 ok $t, "got an obj";
