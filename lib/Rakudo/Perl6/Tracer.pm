@@ -1,4 +1,4 @@
-use Perl6::Parsing;
+use Rakudo::Perl6::Parsing;
 unit class Rakudo::Perl6::Tracer;
 constant $debug = False;
 
