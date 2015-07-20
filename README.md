@@ -1,4 +1,4 @@
-# Perl6::Tracer
+# Rakudo::Perl6::Tracer
 
 Trace Perl6 code.
 
@@ -8,9 +8,9 @@ Also, if classes are imported from nqp.
 
 ## Usage
 
-    use Perl6::Tracer;
+    use Rakudo::Perl6::Tracer;
 
-    my $f = Perl6::Tracer.new(); # create a new object
+    my $f = Rakudo::Perl6::Tracer.new(); # create a new object
     say $f.trace({},$content); #  trace the content
 
 The returned program code will contain tracing statements beside the
