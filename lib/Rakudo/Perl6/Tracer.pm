@@ -49,7 +49,7 @@ method insertline($p)
   
 method trace(%options,$text)
 {
-  my $parser = Perl6::Parsing.new();
+  my $parser = Rakudo::Perl6::Parsing.new();
   %!options = %options;
   $!text = $text;
   $parser.parse( $text ); 
