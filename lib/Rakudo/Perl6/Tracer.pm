@@ -1,5 +1,5 @@
 use Perl6::Parsing;
-unit class Perl6::Tracer;
+unit class Rakudo::Perl6::Tracer;
 constant $debug = False;
 
 has @.tokens;

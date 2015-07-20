@@ -1,4 +1,4 @@
-use Perl6::Tracer;
+use Rakudo::Perl6::Tracer;
 
 sub getnextargument($index, $explanation)
 {
@@ -48,7 +48,7 @@ default
 $i++;
 }
 
-my $f = Perl6::Tracer.new();
+my $f = Rakudo::Perl6::Tracer.new();
 
 my $content = $*IN.slurp-rest;
 
