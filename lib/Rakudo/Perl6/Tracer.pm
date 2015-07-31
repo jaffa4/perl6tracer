@@ -13,6 +13,24 @@ method new() {
   self.bless(  );
 }
 
+submethod get_first_token() {
+  my $line = "";
+  for @!tokens[0..*] -> @token {
+    my $token =  $text.substr(@token[1],@token[2]-@token[1]);
+    if ($token ~~ /(.*?)\n/)
+    {
+      $line~= $0;
+      last;
+    }
+    else
+    {
+      $line~= $token;
+    }
+    $line~~s:g/(<[{"$@%]>)/\\$0/;
+  }
+  return $line;
+}
+
 method insertline($p)
   {
     my $rest = "";
@@ -67,8 +85,18 @@ method trace(%options,$text)
   
   my $tracenext = False;
 
+  # do not note a shebang, it ruins scripts
+  my $firsttoken =  self.get_first_token();
+  if not ($firsttoken ~~ /^\#\!/)
+  {
+    self.insertline(0) 
+  }
+  else 
+  {
+    $lineno--;
+    $tracenext = True;
+  }
 
-  self.insertline(0);
   
   note "before for" if $debug;
   
