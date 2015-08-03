@@ -1,6 +1,7 @@
 use Rakudo::Perl6::Parsing;
 unit class Rakudo::Perl6::Tracer;
 constant $debug = False;
+constant $show_tokens = False;
 
 has @.tokens;
 has %options;
@@ -9,11 +10,13 @@ has $text;
 
 
 
+
+
 method new() {
   self.bless(  );
 }
 
-submethod get_first_token() {
+submethod get_first_line() {
   my $line = "";
   for @!tokens[0..*] -> @token {
     my $token =  $text.substr(@token[1],@token[2]-@token[1]);
@@ -73,6 +76,14 @@ method trace(%options,$text)
   note "before tokenise" if $debug;
   @!tokens = $parser.tokenise();
   note "after tokenise" if $debug;
+  
+  if $show_tokens
+  {
+    for @!tokens.kv -> $i, @token {
+      say "$i: \[{$text.substr(@token[1],@token[2]-@token[1])}] "~@token.perl;
+    
+    }
+  } 
   #say @!tokens.perl;
   if ( @!tokens == 0 ) {
     return;
@@ -85,8 +96,8 @@ method trace(%options,$text)
   my $tracenext = True;
 
   # do not note a shebang, it ruins scripts
-  my $firsttoken =  self.get_first_token();
-  if ($firsttoken ~~ /^\#\!/)
+  my $first_line =  self.get_first_line();
+  if ($first_line ~~ /^\#\!/)
   {
     $lineno--;
   }
@@ -112,6 +123,9 @@ method trace(%options,$text)
     
     if ( $token~~/\}$|^\}/ && (@!tokens.elems>$i+1 && (@!tokens[$i+1][0].EXISTS-KEY("blockoid_end"))))
     {
+      my @t := @!tokens[$i-1];
+      my $prevtoken =  $text.substr(@t[1],@t[2]-@t[1]);
+      push @*token_out,";" if $prevtoken !~~ /^\;/; # add a l if statement does not end with ;
       self.insertline($i);
       $tracenext = False;
     }
