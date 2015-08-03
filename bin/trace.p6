@@ -1,3 +1,4 @@
+use lib 'lib';
 use Rakudo::Perl6::Tracer;
 
 sub getnextargument($index, $explanation)
