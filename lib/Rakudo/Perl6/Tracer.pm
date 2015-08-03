@@ -82,14 +82,13 @@ method trace(%options,$text)
   
   
   
-  my $tracenext = False;
+  my $tracenext = True;
 
   # do not note a shebang, it ruins scripts
   my $firsttoken =  self.get_first_token();
   if ($firsttoken ~~ /^\#\!/)
   {
     $lineno--;
-    $tracenext = True;
   }
 
   
