@@ -26,7 +26,6 @@ submethod get_first_token() {
     {
       $line~= $token;
     }
-    $line~~s:g/(<[{"$@%]>)/\\$0/;
   }
   return $line;
 }
@@ -83,18 +82,13 @@ method trace(%options,$text)
   
   
   
-  my $tracenext = False;
+  my $tracenext = True;
 
   # do not note a shebang, it ruins scripts
   my $firsttoken =  self.get_first_token();
-  if not ($firsttoken ~~ /^\#\!/)
-  {
-    self.insertline(0) 
-  }
-  else 
+  if ($firsttoken ~~ /^\#\!/)
   {
     $lineno--;
-    $tracenext = True;
   }
 
   
@@ -126,7 +120,8 @@ method trace(%options,$text)
         $tracenext = True;
       }
       
-      if ((@token[0][0].EXISTS-KEY("routine_declarator")))
+      if ((@token[0][0].EXISTS-KEY("routine_declarator")) 
+        || (@token[0][0].EXISTS-KEY("multi_declarator")))
       { 
         $tracenext = False;
       }
